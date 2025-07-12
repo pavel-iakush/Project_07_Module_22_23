@@ -7,6 +7,9 @@ public class AgentCharacter : MonoBehaviour, IDirectionalMovable, IDirectionalRo
 
     private AgentMover _mover;
     private DirectionalRotator _rotator;
+    private HealthPoints _health;
+
+    private int _healthPoints = 100;
 
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _rotationSpeed;
@@ -17,6 +20,8 @@ public class AgentCharacter : MonoBehaviour, IDirectionalMovable, IDirectionalRo
 
     public Vector3 Position => _agent.nextPosition;
 
+    public int HealthPoints => _health.Value;
+
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
@@ -24,6 +29,8 @@ public class AgentCharacter : MonoBehaviour, IDirectionalMovable, IDirectionalRo
 
         _mover = new AgentMover(_agent, _moveSpeed);
         _rotator = new DirectionalRotator(transform, _rotationSpeed);
+
+        _health = new HealthPoints(_healthPoints);
     }
 
     private void Update()
@@ -40,4 +47,6 @@ public class AgentCharacter : MonoBehaviour, IDirectionalMovable, IDirectionalRo
     public void SetRotationDirection(Vector3 inputDirection) => _rotator.SetInputDirection(inputDirection);
 
     public bool TryGetPath(Vector3 targetPosition, NavMeshPath pathToTarget) => NavMeshUtils.TryGetPath(_agent, targetPosition, pathToTarget);
+
+    public void TakeDamage(int damage) => _health.TakeDamage(damage);
 }

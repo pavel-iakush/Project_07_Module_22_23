@@ -8,8 +8,11 @@ public class BombBehaviour : MonoBehaviour
     [SerializeField] private ParticleSystem _alarmEffect;
     [SerializeField] private ParticleSystem _explosionEffect;
 
+    private int _explosionValue = 30;
+
     private float _time;
     private float _timeToExplode = 2.5f;
+
     private float _activateRadius = 3f;
     private float _activeRate = 5.5f;
 
@@ -43,6 +46,8 @@ public class BombBehaviour : MonoBehaviour
                 currentExplosion.Play();
 
                 Destroy(gameObject);
+
+                _character.TakeDamage(_explosionValue);
             }
         }
         else
