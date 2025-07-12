@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-public class MouseInput : MonoBehaviour
+public class MouseInput : MonoBehaviour, IBehaviour
 {
     [SerializeField] private AgentCharacter _character;
     [SerializeField] private LayerMask _layerMask;
@@ -10,14 +10,14 @@ public class MouseInput : MonoBehaviour
 
     private void Awake()
     {
-        PointVisualizer pointer = GetComponent<PointVisualizer>();
+        PointerVisualizer pointer = GetComponent<PointerVisualizer>();
 
         NavMeshQueryFilter queryFilter = new NavMeshQueryFilter();
         queryFilter.agentTypeID = 0;
         queryFilter.areaMask = NavMesh.AllAreas;
 
         _characterController = new CompositeController(
-            new MouseClickMovableController(_character.gameObject.GetComponent<NavMeshAgent>(), pointer, _layerMask),
+            new ClickToMoveAgentController(_character.gameObject.GetComponent<NavMeshAgent>(), pointer, _layerMask),
             new AlongMovableVelocityRotatableController(_character, _character));
 
         _characterController.Enable();

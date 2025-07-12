@@ -15,7 +15,7 @@ public class AgentCharacter : MonoBehaviour, IDirectionalMovable, IDirectionalRo
 
     public Quaternion CurrentRotation => _rotator.CurrentRotation;
 
-    public Vector3 Position => _agent.destination;
+    public Vector3 Position => _agent.nextPosition;
 
     private void Awake()
     {
@@ -30,8 +30,8 @@ public class AgentCharacter : MonoBehaviour, IDirectionalMovable, IDirectionalRo
     {
         _rotator.Update(Time.deltaTime);
     }
-
-    public void SetDestination(Vector3 position) => _mover.SetDestination(position);
+    
+    public void SetMoveDirection(Vector3 position) => _mover.SetDestination(position);
 
     public void StopMove() => _mover.Stop();
 
@@ -40,9 +40,4 @@ public class AgentCharacter : MonoBehaviour, IDirectionalMovable, IDirectionalRo
     public void SetRotationDirection(Vector3 inputDirection) => _rotator.SetInputDirection(inputDirection);
 
     public bool TryGetPath(Vector3 targetPosition, NavMeshPath pathToTarget) => NavMeshUtils.TryGetPath(_agent, targetPosition, pathToTarget);
-
-    public void SetMoveDirection(Vector3 inputDirection)
-    {
-        throw new System.NotImplementedException();
-    }
 }

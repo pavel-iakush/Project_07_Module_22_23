@@ -1,13 +1,15 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-public class MouseClickMovableController : Controller
+public class ClickToMoveAgentController : Controller
 {
     private NavMeshAgent _agent;
-    private PointVisualizer _visualizer;
+    private PointerVisualizer _visualizer;
     private LayerMask _layerMask;
 
-    public MouseClickMovableController(NavMeshAgent agent, PointVisualizer visualizer, LayerMask layerMask)
+    private int _leftMouseButton = 0;
+
+    public ClickToMoveAgentController(NavMeshAgent agent, PointerVisualizer visualizer, LayerMask layerMask)
     {
         _agent = agent;
         _visualizer = visualizer;
@@ -16,7 +18,7 @@ public class MouseClickMovableController : Controller
 
     protected override void UpdateLogic(float deltaTime)
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(_leftMouseButton))
         {
             RaycastHit hit;
 

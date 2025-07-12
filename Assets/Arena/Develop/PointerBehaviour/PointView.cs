@@ -14,8 +14,9 @@ public class PointView : MonoBehaviour
 
     private void Awake()
     {
-        _originalScale = transform.localScale;
         _startYPosition = transform.position.y;
+
+        _originalScale = transform.localScale;
     }
 
     private void Update()

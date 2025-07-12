@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class AgentCharacterView : MonoBehaviour
 {
-    private readonly int IsRunningKey = Animator.StringToHash("IsWalking");
+    private readonly int IsWalkingKey = Animator.StringToHash("IsWalking");
 
     [SerializeField] private Animator _animator;
     [SerializeField] private AgentCharacter _character;
@@ -17,11 +17,11 @@ public class AgentCharacterView : MonoBehaviour
 
     private void StopRunning()
     {
-        _animator.SetBool(IsRunningKey, false);
+        _animator.SetBool(IsWalkingKey, false);
     }
 
     private void StartRunning()
     {
-        _animator.SetBool(IsRunningKey, true);
+        _animator.SetBool(IsWalkingKey, true);
     }
 }
