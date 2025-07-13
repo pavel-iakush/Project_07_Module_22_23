@@ -7,7 +7,17 @@ public class AgentCharacterView : MonoBehaviour
     [SerializeField] private Animator _animator;
     [SerializeField] private AgentCharacter _character;
 
+    private int _woundedLayer = 1;
+    private float _woundedWeight = 1.0f;
+
     private float _standValue = 0.05f;
+
+    private int _cachedHealth;
+
+    private void Start()
+    {
+        _cachedHealth = _character.HealthPoints;
+    }
 
     private void Update()
     {
@@ -15,6 +25,15 @@ public class AgentCharacterView : MonoBehaviour
             StartRunning();
         else
             StopRunning();
+
+        if (_character.HealthPoints < _cachedHealth)
+        {
+            Hit();
+            _cachedHealth = _character.HealthPoints;
+        }
+
+        if (_character.HealthPoints <= 30)
+            _animator.SetLayerWeight(_woundedLayer, _woundedWeight);
 
         if (_character.HealthPoints <= 0)
             Death();

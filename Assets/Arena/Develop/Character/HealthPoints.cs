@@ -30,6 +30,6 @@ public class HealthPoints
     public void TakeDamage(int damage)
     {
         Value -= damage;
-        Debug.Log(_value);
+        Debug.Log($"Health: { _value}");
     }
 }

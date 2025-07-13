@@ -8,7 +8,7 @@ public class BombBehaviour : MonoBehaviour
     [SerializeField] private ParticleSystem _alarmEffect;
     [SerializeField] private ParticleSystem _explosionEffect;
 
-    private int _explosionValue = 30;
+    private int _explosionValue = 40;
 
     private float _time;
     private float _timeToExplode = 2.5f;
