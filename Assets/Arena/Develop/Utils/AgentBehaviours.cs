@@ -1,5 +1,5 @@
 ﻿public enum AgentBehaviours
 {
-    MouseControl = 0,
+    MouseInput = 0,
     IdleAreaPatrol = 1,
 }

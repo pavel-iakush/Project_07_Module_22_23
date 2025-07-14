@@ -7,6 +7,8 @@ public class AreaPatrolAgentController : Controller
 {
     private NavMeshAgent _agent;
 
+    private float _areaRange = 5f;
+
     public AreaPatrolAgentController(NavMeshAgent agent)
     {
         _agent = agent;

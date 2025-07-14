@@ -25,7 +25,7 @@ public class MouseInput : MonoBehaviour, IBehaviour
 
     private void Update()
     {
-        if (_character.HealthPoints == 0)
+        if (_character.HealthPoints <= 0)
             _characterController.Disable();
 
         _characterController.Update(Time.deltaTime);
