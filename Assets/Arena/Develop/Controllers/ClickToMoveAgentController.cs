@@ -3,15 +3,16 @@ using UnityEngine.AI;
 
 public class ClickToMoveAgentController : Controller
 {
-    private NavMeshAgent _agent;
+    private IDirectionalMovable _movable;
+
     private PointerVisualizer _visualizer;
     private LayerMask _layerMask;
 
     private int _leftMouseButton = 0;
 
-    public ClickToMoveAgentController(NavMeshAgent agent, PointerVisualizer visualizer, LayerMask layerMask)
+    public ClickToMoveAgentController(IDirectionalMovable movable, PointerVisualizer visualizer, LayerMask layerMask)
     {
-        _agent = agent;
+        _movable = movable;
         _visualizer = visualizer;
         _layerMask = layerMask;
     }
@@ -24,7 +25,8 @@ public class ClickToMoveAgentController : Controller
 
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity, _layerMask))
             {
-                _agent.destination = hit.point;
+                _movable.SetMoveDirection(hit.point);
+
                 _visualizer.VisualizePoint(hit.point);
             }
         }

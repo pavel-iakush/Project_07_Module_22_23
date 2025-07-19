@@ -17,8 +17,11 @@ public class MouseInput : MonoBehaviour, IBehaviour
         queryFilter.areaMask = NavMesh.AllAreas;
 
         _characterController = new CompositeController(
-            new ClickToMoveAgentController(_character.gameObject.GetComponent<NavMeshAgent>(), pointer, _layerMask),
+            new ClickToMoveAgentController(_character, pointer, _layerMask),
             new AlongMovableVelocityRotatableController(_character, _character));
+        //_characterController = new CompositeController(
+        //    new AreaPatrolAgentController(_character, queryFilter),
+        //    new AlongMovableVelocityRotatableController(_character, _character));
 
         _characterController.Enable();
     }

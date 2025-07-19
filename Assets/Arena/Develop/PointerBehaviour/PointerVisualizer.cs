@@ -2,7 +2,7 @@
 
 public class PointerVisualizer : MonoBehaviour
 {
-    [SerializeField] private GameObject _pointer;
+    [SerializeField] private Pointer _pointer;
     [SerializeField] private AgentCharacter _character;
 
     private GameObject _currentPointer;
@@ -29,7 +29,7 @@ public class PointerVisualizer : MonoBehaviour
     }
 
     private void CreateNewPointer(Vector3 position)
-        => _currentPointer = Instantiate(_pointer, position, Quaternion.identity);
+        => _currentPointer = Instantiate(_pointer.gameObject, position, Quaternion.identity);
 
     private void ClearPointer()
         => Destroy(_currentPointer);

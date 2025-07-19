@@ -9,10 +9,9 @@ public class AgentCharacter : MonoBehaviour, IDirectionalMovable, IDirectionalRo
     private DirectionalRotator _rotator;
     private HealthPoints _health;
 
-    private int _healthPoints = 100;
-
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _rotationSpeed;
+    [SerializeField] private int _healthPoints;
 
     public Vector3 CurrentVelocity => _mover.CurrentVelocity;
 
@@ -40,9 +39,9 @@ public class AgentCharacter : MonoBehaviour, IDirectionalMovable, IDirectionalRo
     
     public void SetMoveDirection(Vector3 position) => _mover.SetDestination(position);
 
-    public void StopMove() => _mover.Stop();
+    //public void StopMove() => _mover.Stop();
 
-    public void ResumeMove() => _mover.Resume();
+    //public void ResumeMove() => _mover.Resume();
 
     public void SetRotationDirection(Vector3 inputDirection) => _rotator.SetInputDirection(inputDirection);
 
