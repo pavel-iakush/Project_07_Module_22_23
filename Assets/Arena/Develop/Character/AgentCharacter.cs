@@ -41,11 +41,7 @@ public class AgentCharacter : MonoBehaviour, IDirectionalMovable, IDirectionalRo
 
     public void StopMove() => _mover.Stop();
 
-    //public void ResumeMove() => _mover.Resume();
-
     public void SetRotationDirection(Vector3 inputDirection) => _rotator.SetInputDirection(inputDirection);
-
-    //public bool TryGetPath(Vector3 targetPosition, NavMeshPath pathToTarget) => NavMeshUtils.TryGetPath(_agent, targetPosition, pathToTarget);
 
     public void TakeDamage(int damage) => _health.TakeDamage(damage);
 }

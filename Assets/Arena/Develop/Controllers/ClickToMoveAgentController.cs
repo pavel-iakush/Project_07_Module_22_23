@@ -22,7 +22,7 @@ public class ClickToMoveAgentController : Controller
 
     protected override void UpdateLogic(float deltaTime)
     {
-        if (UnityEngine.Input.GetMouseButtonDown(_leftMouseButton))
+        if (Input.GetMouseButtonDown(_leftMouseButton))
         {
             Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
 

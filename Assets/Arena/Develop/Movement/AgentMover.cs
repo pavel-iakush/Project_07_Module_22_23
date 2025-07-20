@@ -23,9 +23,4 @@ public class AgentMover
     {
         _agent.isStopped = true;
     }
-
-    public void Resume()
-    {
-        _agent.isStopped = false;
-    }
 }

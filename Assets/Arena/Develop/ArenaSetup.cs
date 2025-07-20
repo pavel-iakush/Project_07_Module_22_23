@@ -46,26 +46,46 @@ public class ArenaSetup : MonoBehaviour
 
         if (_character.HealthPoints <= 0)
         {
-            _currentController.Disable();
-            _character.StopMove();
+            ShutdownAgentMovement();
         }
 
         if (_time >= _timeToChangeController)
         {
-            _currentController.Disable();
-            _currentController = _agentAIController;
-            _currentController.Enable();
+            SwitchToAgentAIControl();
         }
 
-        if (Input.GetMouseButtonDown(_leftMouseButton) && _time >= _timeToChangeController)
+        if (IsMousePressedWhileControlledByAI())
         {
             _time = 0;
 
-            _currentController.Disable();
-            _currentController = _playerController;
-            _currentController.Enable();
+            SwitchToPlayerControl();
         }
 
         _currentController.Update(Time.deltaTime);
+    }
+
+    private void ShutdownAgentMovement()
+    {
+        _currentController.Disable();
+        _character.StopMove();
+    }
+
+    private bool IsMousePressedWhileControlledByAI()
+    {
+        return Input.GetMouseButtonDown(_leftMouseButton) && _time >= _timeToChangeController;
+    }
+
+    private void SwitchToPlayerControl()
+    {
+        _currentController.Disable();
+        _currentController = _playerController;
+        _currentController.Enable();
+    }
+
+    private void SwitchToAgentAIControl()
+    {
+        _currentController.Disable();
+        _currentController = _agentAIController;
+        _currentController.Enable();
     }
 }

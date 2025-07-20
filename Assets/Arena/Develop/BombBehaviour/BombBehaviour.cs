@@ -31,32 +31,50 @@ public class BombBehaviour : MonoBehaviour
 
     private void Update()
     {
-        if ((_character.Position - transform.position).magnitude < _activateRadius)
+        if (IsCharacterInRange())
         {
-            _time += Time.deltaTime;
-
-            _emission.rateOverTime = _activeRate;
-
-            _color.color = Color.red;
+            ActivateBomb();
 
             if (_time >= _timeToExplode)
             {
-                ParticleSystem currentExplosion = Instantiate(_explosionEffect, transform.position, Quaternion.identity);
-                currentExplosion.gameObject.SetActive(true);
-                currentExplosion.Play();
-
-                Destroy(gameObject);
-
-                _character.TakeDamage(_explosionValue);
+                ExplodeBomb();
             }
         }
         else
         {
-            _time = 0;
-
-            _emission.rateOverTime = _defaultRate;
-
-            _color.color = _defaultColor;
+            DeactivateBomb();
         }
+    }
+
+    private void ExplodeBomb()
+    {
+        ParticleSystem currentExplosion = Instantiate(_explosionEffect, transform.position, Quaternion.identity);
+        currentExplosion.gameObject.SetActive(true);
+        currentExplosion.Play();
+
+        Destroy(gameObject);
+
+        _character.TakeDamage(_explosionValue);
+    }
+
+    private void DeactivateBomb()
+    {
+        _time = 0;
+
+        _emission.rateOverTime = _defaultRate;
+        _color.color = _defaultColor;
+    }
+
+    private void ActivateBomb()
+    {
+        _time += Time.deltaTime;
+
+        _emission.rateOverTime = _activeRate;
+        _color.color = Color.red;
+    }
+
+    private bool IsCharacterInRange()
+    {
+        return (_character.Position - transform.position).magnitude < _activateRadius;
     }
 }
