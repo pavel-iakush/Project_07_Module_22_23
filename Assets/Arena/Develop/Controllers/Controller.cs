@@ -1,6 +1,6 @@
 ﻿public abstract class Controller
 {
-    public bool _isEnabled;
+    private bool _isEnabled;
 
     public virtual void Enable() => _isEnabled = true;
 
