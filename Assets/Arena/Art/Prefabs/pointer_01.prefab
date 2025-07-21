@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: -4056913343182793344}
   - component: {fileID: 7862870152560628260}
   m_Layer: 0
-  m_Name: pointerView
+  m_Name: pointer_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

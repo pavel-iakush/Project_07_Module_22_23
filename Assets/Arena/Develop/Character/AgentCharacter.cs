@@ -19,6 +19,8 @@ public class AgentCharacter : MonoBehaviour, IDirectionalMovable, IDirectionalRo
 
     public Vector3 Position => _agent.nextPosition;
 
+    public Vector3 Destination => _agent.destination;
+
     public int HealthPoints => _health.Value;
 
     private void Awake()

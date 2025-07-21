@@ -8878,7 +8878,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15ca0d835a843f84ea233b039581a218, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pointer: {fileID: 7862870152560628260, guid: 7e9f9165f78c2354da26c4068398ee6b,
+  _pointerPrefab: {fileID: 7862870152560628260, guid: 7e9f9165f78c2354da26c4068398ee6b,
     type: 3}
   _character: {fileID: 1958113495}
 --- !u!114 &1471290657

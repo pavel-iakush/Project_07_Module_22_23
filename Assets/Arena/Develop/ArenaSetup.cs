@@ -14,7 +14,6 @@ public class ArenaSetup : MonoBehaviour
     private Controller _agentAIController;
     private Controller _currentController;
 
-    private PointerVisualizer _pointer;
     private NavMeshQueryFilter _queryFilter;
 
     private float _time;
@@ -24,9 +23,7 @@ public class ArenaSetup : MonoBehaviour
 
     private void Awake()
     {
-        _pointer = GetComponent<PointerVisualizer>();
-
-        _playerControllable = new PlayerControl(_character, _pointer, _layerMask, _camera);
+        _playerControllable = new PlayerControl(_character, _layerMask, _camera);
         _playerController = _playerControllable.Initialize();
 
         _queryFilter = new NavMeshQueryFilter();

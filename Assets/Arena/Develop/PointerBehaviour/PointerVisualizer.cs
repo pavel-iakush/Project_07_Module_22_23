@@ -2,7 +2,7 @@
 
 public class PointerVisualizer : MonoBehaviour
 {
-    [SerializeField] private Pointer _pointer;
+    [SerializeField] private Pointer _pointerPrefab;
     [SerializeField] private AgentCharacter _character;
 
     private GameObject _currentPointer;
@@ -10,10 +10,10 @@ public class PointerVisualizer : MonoBehaviour
 
     private void Update()
     {
-        if (_currentPointer == null)
-            return;
+        if (HasClickedSomewhere())
+            VisualizePoint(_character.Destination);
 
-        if (IsPointerReached())
+        if (_currentPointer != null && IsPointerReached())
             ClearPointer();
     }
 
@@ -29,11 +29,20 @@ public class PointerVisualizer : MonoBehaviour
     }
 
     private void CreateNewPointer(Vector3 position)
-        => _currentPointer = Instantiate(_pointer.gameObject, position, Quaternion.identity);
+        => _currentPointer = Instantiate(_pointerPrefab.gameObject, position, Quaternion.identity);
 
     private void ClearPointer()
-        => Destroy(_currentPointer);
+    {
+        if (_currentPointer != null)
+        {
+            Destroy(_currentPointer);
+            _currentPointer = null;
+        }
+    }
+
+    private bool HasClickedSomewhere()
+        => (_character.Position - _character.Destination).magnitude > _deadZone;
 
     private bool IsPointerReached()
-        => (_character.Position - _currentPointer.transform.position).magnitude < _deadZone;
+        => (_character.Position - _currentPointer.transform.position).magnitude <= _deadZone;
 }
