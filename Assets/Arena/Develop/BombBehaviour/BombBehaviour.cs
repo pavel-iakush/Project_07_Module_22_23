@@ -1,80 +1,59 @@
 using UnityEngine;
-using static UnityEngine.ParticleSystem;
 
 public class BombBehaviour : MonoBehaviour
 {
     [SerializeField] private AgentCharacter _character;
 
-    [SerializeField] private ParticleSystem _alarmEffect;
-    [SerializeField] private ParticleSystem _explosionEffect;
+    private BombTimer _timer;
+
+    private float _activateRadius = 3f;
+    private float _timeToExplode = 2.5f;
 
     private int _explosionValue = 40;
 
-    private float _time;
-    private float _timeToExplode = 2.5f;
+    private bool _hasExploded;
 
-    private float _activateRadius = 3f;
-    private float _activeRate = 5.5f;
-
-    private float _defaultRate = 2f;
-    private Color _defaultColor = Color.white;
-
-    private EmissionModule _emission;
-    private ColorOverLifetimeModule _color;
+    public BombTimer Timer => _timer;
 
     private void Awake()
     {
-        _emission = _alarmEffect.emission;
-
-        _color = _alarmEffect.colorOverLifetime;
+        _timer = new BombTimer(_timeToExplode);
     }
 
     private void Update()
     {
         if (IsCharacterInRange())
         {
-            ActivateBomb();
+            Activate();
 
-            if (_time >= _timeToExplode)
-            {
-                ExplodeBomb();
-            }
+            if (_timer.IsOutOfTime())
+                Explode();
         }
         else
         {
-            DeactivateBomb();
+            Deactivate();
         }
     }
 
-    private void ExplodeBomb()
+    private void Deactivate() => _timer.Reset();
+
+    private void Activate() => _timer.Start(Time.deltaTime);
+
+    private void Explode()
     {
-        ParticleSystem currentExplosion = Instantiate(_explosionEffect, transform.position, Quaternion.identity);
-        currentExplosion.gameObject.SetActive(true);
-        currentExplosion.Play();
+        if (_hasExploded)
+            return;
 
-        Destroy(gameObject);
+        _hasExploded = true;
 
+        _timer.TriggerExplosion();
         _character.TakeDamage(_explosionValue);
-    }
 
-    private void DeactivateBomb()
-    {
-        _time = 0;
-
-        _emission.rateOverTime = _defaultRate;
-        _color.color = _defaultColor;
-    }
-
-    private void ActivateBomb()
-    {
-        _time += Time.deltaTime;
-
-        _emission.rateOverTime = _activeRate;
-        _color.color = Color.red;
+        Destroy(gameObject, 0.1f);
     }
 
     private bool IsCharacterInRange()
     {
-        return (_character.Position - transform.position).magnitude < _activateRadius;
+        return (_character.Position - transform.position).magnitude <= _activateRadius;
     }
 }

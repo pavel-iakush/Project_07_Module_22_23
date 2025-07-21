@@ -47,8 +47,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _character: {fileID: 0}
-  _alarmEffect: {fileID: 8101991702033317112}
-  _explosionEffect: {fileID: 6119129358510949877}
 --- !u!1 &2198084764655536849
 GameObject:
   m_ObjectHideFlags: 0
@@ -4925,6 +4923,7 @@ GameObject:
   - component: {fileID: 7324438529639606013}
   - component: {fileID: 5213164449874870110}
   - component: {fileID: 4849254022667207466}
+  - component: {fileID: 2238609448420326432}
   m_Layer: 0
   m_Name: BombView
   m_TagString: Untagged
@@ -5032,6 +5031,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48706297f495cfa4b9a1d4f8f6a43fb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2238609448420326432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7521210029362432629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d3d5531a96f20947ab83222529e5d2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _alarmEffect: {fileID: 8101991702033317112}
+  _explosionEffect: {fileID: 6119129358510949877}
 --- !u!1001 &2262736975255946065
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5068,7 +5081,7 @@ PrefabInstance:
     - target: {fileID: 5162910912013668194, guid: cf82839c411151342a7b2337bda9fb34,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5444105318733727396, guid: cf82839c411151342a7b2337bda9fb34,
         type: 3}
