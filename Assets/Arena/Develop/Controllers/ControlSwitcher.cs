@@ -14,15 +14,21 @@ public class ControlSwitcher : MonoBehaviour
     private Controller _agentAIController;
     private Controller _currentController;
 
+    private Controller _rotationController;
+
     private float _time;
     private float _timeToChangeController = 2f;
     private int _leftMouseButton = 0;
 
     public Controller CurrentController => _currentController;
 
+    public Controller RotationController => _rotationController;
+
     private void Awake()
     {
         _raycastService = new RaycastService();
+
+        _rotationController = new AlongMovableVelocityRotatableController(_character, _character);
 
         _queryFilter = new NavMeshQueryFilter();
         _queryFilter.agentTypeID = 0;

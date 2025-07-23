@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class ResultAgentController : MonoBehaviour
 {
-    [SerializeField] private AgentCharacter _character;
     [SerializeField] private ControlSwitcher _controlSwitcher;
 
     private Controller _resultController;
@@ -29,9 +28,7 @@ public class ResultAgentController : MonoBehaviour
     {
         _lastController = _controlSwitcher.CurrentController;
 
-        _resultController = new CompositeController(
-                                _controlSwitcher.CurrentController,
-                                new AlongMovableVelocityRotatableController(_character, _character));
+        _resultController = new CompositeController(_controlSwitcher.CurrentController, _controlSwitcher.RotationController);
 
         _resultController.Enable();
     }
