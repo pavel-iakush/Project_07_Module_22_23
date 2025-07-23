@@ -6,27 +6,33 @@ public class ResultAgentController : MonoBehaviour
     [SerializeField] private ControlSwitcher _controlSwitcher;
 
     private Controller _resultController;
+    private Controller _lastController;
 
     private void Start()
     {
-        if (_controlSwitcher == null)
-        {
-            _controlSwitcher = GetComponent<ControlSwitcher>();
-        }
-
-        SetResultController();
-        _resultController.Enable();
+        ProcessControlSwitch();
     }
 
     private void Update()
     {
-            _resultController.Update(Time.deltaTime);
+        if (_controlSwitcher.CurrentController != _lastController)
+        {
+            _resultController.Disable();
+
+            ProcessControlSwitch();
+        }
+
+        _resultController.Update(Time.deltaTime);
     }
 
-    private void SetResultController()
+    private void ProcessControlSwitch()
     {
+        _lastController = _controlSwitcher.CurrentController;
+
         _resultController = new CompositeController(
-            _controlSwitcher.CurrentController,
-            new AlongMovableVelocityRotatableController(_character, _character));
+                                _controlSwitcher.CurrentController,
+                                new AlongMovableVelocityRotatableController(_character, _character));
+
+        _resultController.Enable();
     }
 }

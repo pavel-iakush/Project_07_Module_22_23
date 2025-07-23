@@ -9,7 +9,7 @@ public class AreaPatrolAgentController : Controller
     private float _areaRange = 5f;
 
     private float _time;
-    private float _timeToStartPatrol = 3f;
+    private float _timeToStartPatrol = 1.8f;
 
     private NavMeshQueryFilter _queryFilter;
     private NavMeshPath _pathToTarget = new NavMeshPath();

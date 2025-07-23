@@ -15,7 +15,7 @@ public class ControlSwitcher : MonoBehaviour
     private Controller _currentController;
 
     private float _time;
-    private float _timeToChangeController = 3f;
+    private float _timeToChangeController = 2f;
     private int _leftMouseButton = 0;
 
     public Controller CurrentController => _currentController;
@@ -45,15 +45,19 @@ public class ControlSwitcher : MonoBehaviour
             return;
         }
 
-        if (IsPlayerAFK())
-        {
-            SwitchToAgentAIControl();
-        }
-
-        if (IsMousePressedWhileControlledByAI())
+        if (Input.GetMouseButtonDown(_leftMouseButton))
         {
             _time = 0;
-            SwitchToPlayerControl();
+
+            if (_currentController == _agentAIController)
+            {
+                SwitchController(_playerController);
+            }
+        }
+
+        if (IsPlayerAFK())
+        {
+            SwitchController(_agentAIController);
         }
     }
 
@@ -68,22 +72,13 @@ public class ControlSwitcher : MonoBehaviour
         return _time >= _timeToChangeController && _currentController == _playerController;
     }
 
-    private bool IsMousePressedWhileControlledByAI()
+    private void SwitchController(Controller newController)
     {
-        return Input.GetMouseButtonDown(_leftMouseButton) && _currentController == _agentAIController;
-    }
+        if (_currentController == newController)
+            return;
 
-    private void SwitchToPlayerControl()
-    {
         _currentController.Disable();
-        _currentController = _playerController;
-        _currentController.Enable();
-    }
-
-    private void SwitchToAgentAIControl()
-    {
-        _currentController.Disable();
-        _currentController = _agentAIController;
+        _currentController = newController;
         _currentController.Enable();
     }
 }
