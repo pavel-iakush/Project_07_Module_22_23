@@ -1,37 +1,35 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class ArenaSetup : MonoBehaviour
+public class ControlSwitcher : MonoBehaviour
 {
     [SerializeField] private AgentCharacter _character;
     [SerializeField] private LayerMask _layerMask;
     [SerializeField] private Camera _camera;
 
-    private IControllable _playerControllable;
-    private IControllable _agentAIControllable;
+    private RaycastService _raycastService;
+    private NavMeshQueryFilter _queryFilter;
 
     private Controller _playerController;
     private Controller _agentAIController;
     private Controller _currentController;
 
-    private NavMeshQueryFilter _queryFilter;
-
     private float _time;
     private float _timeToChangeController = 3f;
-
     private int _leftMouseButton = 0;
+
+    public Controller CurrentController => _currentController;
 
     private void Awake()
     {
-        _playerControllable = new PlayerControl(_character, _layerMask, _camera);
-        _playerController = _playerControllable.Initialize();
+        _raycastService = new RaycastService();
 
         _queryFilter = new NavMeshQueryFilter();
         _queryFilter.agentTypeID = 0;
         _queryFilter.areaMask = NavMesh.AllAreas;
 
-        _agentAIControllable = new AgentAIControl(_character, _queryFilter);
-        _agentAIController = _agentAIControllable.Initialize();
+        _playerController = new ClickToMoveAgentController(_character, _layerMask, _raycastService, _camera);
+        _agentAIController = new AreaPatrolAgentController(_character, _queryFilter);
 
         _currentController = _playerController;
         _currentController.Enable();
@@ -44,9 +42,10 @@ public class ArenaSetup : MonoBehaviour
         if (_character.HealthPoints <= 0)
         {
             ShutdownAgentMovement();
+            return;
         }
 
-        if (_time >= _timeToChangeController)
+        if (IsPlayerAFK())
         {
             SwitchToAgentAIControl();
         }
@@ -54,11 +53,8 @@ public class ArenaSetup : MonoBehaviour
         if (IsMousePressedWhileControlledByAI())
         {
             _time = 0;
-
             SwitchToPlayerControl();
         }
-
-        _currentController.Update(Time.deltaTime);
     }
 
     private void ShutdownAgentMovement()
@@ -67,9 +63,14 @@ public class ArenaSetup : MonoBehaviour
         _character.StopMove();
     }
 
+    private bool IsPlayerAFK()
+    {
+        return _time >= _timeToChangeController && _currentController == _playerController;
+    }
+
     private bool IsMousePressedWhileControlledByAI()
     {
-        return Input.GetMouseButtonDown(_leftMouseButton) && _time >= _timeToChangeController;
+        return Input.GetMouseButtonDown(_leftMouseButton) && _currentController == _agentAIController;
     }
 
     private void SwitchToPlayerControl()

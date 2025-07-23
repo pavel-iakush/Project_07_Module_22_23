@@ -8857,8 +8857,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1471290658}
-  - component: {fileID: 1471290657}
   - component: {fileID: 1471290656}
+  - component: {fileID: 1471290659}
+  - component: {fileID: 1471290661}
+  - component: {fileID: 1471290660}
   m_Layer: 0
   m_Name: ArenaSetup
   m_TagString: Untagged
@@ -8881,23 +8883,6 @@ MonoBehaviour:
   _pointerPrefab: {fileID: 7862870152560628260, guid: 7e9f9165f78c2354da26c4068398ee6b,
     type: 3}
   _character: {fileID: 1958113495}
---- !u!114 &1471290657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1471290655}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2accb3c85409ffd49b26cf04352015f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _character: {fileID: 1958113495}
-  _layerMask:
-    serializedVersion: 2
-    m_Bits: 128
-  _camera: {fileID: 330585545}
 --- !u!4 &1471290658
 Transform:
   m_ObjectHideFlags: 0
@@ -8913,6 +8898,54 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1471290659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471290655}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03aa022e479027d47af85613c8e676f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _character: {fileID: 1958113495}
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  _camera: {fileID: 330585545}
+--- !u!114 &1471290660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471290655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bbcece2de1ec1846a2d328d8d352c44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _character: {fileID: 1958113495}
+  _controlSwitcher: {fileID: 1471290661}
+--- !u!114 &1471290661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471290655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 668db83af6a524849a0d06c8eaf52f4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _character: {fileID: 1958113495}
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  _camera: {fileID: 330585545}
 --- !u!1001 &1483179410
 PrefabInstance:
   m_ObjectHideFlags: 0
