@@ -1,11 +1,11 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class ControlSwitcher : MonoBehaviour
+public class ControlSwitcher/* : MonoBehaviour*/
 {
-    [SerializeField] private AgentCharacter _character;
-    [SerializeField] private LayerMask _layerMask;
-    [SerializeField] private Camera _camera;
+    /*[SerializeField] */private AgentCharacter _character;
+    /*[SerializeField] */private LayerMask _layerMask;
+    /*[SerializeField] */private Camera _camera;
 
     private RaycastService _raycastService;
     private NavMeshQueryFilter _queryFilter;
@@ -20,11 +20,18 @@ public class ControlSwitcher : MonoBehaviour
     private float _timeToChangeController = 2f;
     private int _leftMouseButton = 0;
 
+    public ControlSwitcher(AgentCharacter character, LayerMask layerMask, Camera camera)
+    {
+        _character = character;
+        _layerMask = layerMask;
+        _camera = camera;
+    }
+
     public Controller CurrentController => _currentController;
 
     public Controller RotationController => _rotationController;
 
-    private void Awake()
+    public void Awake()
     {
         _raycastService = new RaycastService();
 
@@ -41,7 +48,7 @@ public class ControlSwitcher : MonoBehaviour
         _currentController.Enable();
     }
 
-    private void Update()
+    public void Update()
     {
         _time += Time.deltaTime;
 

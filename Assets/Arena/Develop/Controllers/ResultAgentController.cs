@@ -1,18 +1,23 @@
 using UnityEngine;
 
-public class ResultAgentController : MonoBehaviour
+public class ResultAgentController/* : MonoBehaviour*/
 {
-    [SerializeField] private ControlSwitcher _controlSwitcher;
+    /*[SerializeField] */private ControlSwitcher _controlSwitcher;
 
     private Controller _resultController;
     private Controller _lastController;
 
-    private void Start()
+    public ResultAgentController(ControlSwitcher controlSwitcher)
+    {
+        _controlSwitcher = controlSwitcher;
+    }
+
+    public void Start()
     {
         ProcessControlSwitch();
     }
 
-    private void Update()
+    public void Update()
     {
         if (_controlSwitcher.CurrentController != _lastController)
         {
